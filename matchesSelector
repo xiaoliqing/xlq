@@ -1,4 +1,5 @@
-function matchesSelector(element, selector) {
+//解决 matchesSelector 的跨浏览器问题
+function matchesSelector(element, selector) { 
 		if (element.matchesSelector) {
 			return element.matchesSelector(selector);
 		} else if (element.msMatchesSelector) {
