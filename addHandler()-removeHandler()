@@ -1,0 +1,28 @@
+//视情况分别使用 DOM0级方法、 DOM2级方法或者IE方法来添加事件
+var EventUtil = {
+	addHandler : function(element, type, handler) { //接收的三个参数：要操作的元素、事件名称、事件处理程序函数
+		if (element.addEventListener) {
+				element.addEventListener(type, handler, false);
+		} else if (element.attachEvent) {
+				element.attachEvent("on" + type, handler);
+		} else {
+				elemnet["on" + type] = handler;
+		}
+	},
+	removeHandler : function(element, type, handler) {
+		if (element.removeEventListener) {
+				element.removeEventListener(type, handler, false);
+		} else if (element.detachEvent) {
+				element.detachEvent("on" + type, handler);
+		} else {
+				element["on" + type] = null;
+		}
+	}
+};
+//使用 EventUtil对象的方法
+var btn = document.getElementById('myBtn');
+var handler = function() {
+	alert("Clicked");
+};
+EventUtil.addHandler(btn, "click", handler);
+EventUtil.removeHandler(btn, "click", handler);
